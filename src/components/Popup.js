@@ -1,57 +1,33 @@
-import React from 'react'
+// import React from 'react'
+import './total.css'
 
-const Popup = (pushh) => {
- console.log(pushh)
-  // const itemss = [
-  //   {
-  //     id: 1,
-  //     img: "./img/image11.jpg",
-  //     name: "boat",
-  //     price: "$45",
-  //   },
-  //   {
-  //     id: 2,
-  //     img: "./img/image22.jpg",
-  //     name: "boat",
-  //     price: "$45",
-  //   },
-  //   {
-  //     id: 3,
-  //     img: "./img/image33.jpg",
-  //     name: "boat",
-  //     price: "$45",
-  //   },
-  //   {
-  //     id: 4,
-  //     img: "./img/image44.jpg",
-  //     name: "boat",
-  //     price: "$45",
-  //   },
-  //   {
-  //     id: 5,
-  //     img: "./img/image55.jpg",
-  //     name: "boat",
-  //     price: "$45",
-  //   },
-  //   {
-  //     id: 6,
-  //     img: "./img/image66.jpg",
-  //     name: "boat",
-  //     price: "$45",
-  //   },
-  // ];
-
+const Popup = ({cartItems,handleclick,handlesubproduct,cartdelete}) => {
+ 
+    const totalprice=cartItems.reduce((price,item)=>price + item.quantity * item.price,0);
   return (
+    <div className="cartitem">
+    <h2 className="cartitemhea">cart item</h2>
+    <div className='clearcart'>{cartItems.length>=1 &&(<button className="claerbtn" onClick={cartdelete}>clear cart</button>)}</div>
+    {cartItems.length === 0 && <div className='cartitemem'>cart is empty</div> }
     <div>
-    {pushh && (
-      <div>
-        <div>{pushh.name}</div>
-        <div>{pushh.price}</div>
-        <div>{pushh.img}</div>
-        <button>-</button>
-        <button>+</button>
+        {cartItems.map((item)=>(
+        <div key={item.id} className="cartitemlist">
+            <img className="cartitemimage" src={item.img} alt={item.name}/>
+            <div className="cartitemname">{item.name}</div>
+            <div className="cartitemfun">
+                <button className="cartitemadd" onClick={()=>{handleclick(item)}}>+</button>
+                <button className="cartitemsub" onClick={()=>{handlesubproduct(item)}}>-</button>
+            </div>
+            <div className="cartitemprice">
+                {item.quantity}*{item.price}
+            </div>
         </div>
-        )}
+            ))}
+    </div>
+    <div className="cartitemtotal">
+        total price
+        <div className="cartitemtotprice">${totalprice}</div>
+    </div>
     </div>
   )
 }

@@ -12,7 +12,7 @@ const Cart = ({ item, handleclick }) => {
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>{item.price}</Card.Text>
-            <Button variant="primary" onClick={() => { handleclick(item) }}>Add cart</Button>
+            <Button className='btnn'variant="primary" onClick={() => {handleclick(item)}}>Add cart</Button>
           </Card.Body>
         </Card>
       </div>
@@ -20,51 +20,13 @@ const Cart = ({ item, handleclick }) => {
   )
 }
 
-const Home = ({ handleclick }) => {
-  const items = [
-    {
-      id: 1,
-      img: "./img/image11.jpg",
-      name: "boat",
-      price: "$45",
-    },
-    {
-      id: 2,
-      img: "./img/image22.jpg",
-      name: "boat",
-      price: "$45",
-    },
-    {
-      id: 3,
-      img: "./img/image33.jpg",
-      name: "boat",
-      price: "$45",
-    },
-    {
-      id: 4,
-      img: "./img/image44.jpg",
-      name: "boat",
-      price: "$45",
-    },
-    {
-      id: 5,
-      img: "./img/image55.jpg",
-      name: "boat",
-      price: "$45",
-    },
-    {
-      id: 6,
-      img: "./img/image66.jpg",
-      name: "boat",
-      price: "$45",
-    },
-  ];
- 
+const Home = ({ handleclick ,productItems}) => {
+  
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-3">
-          {items.map((item) => (
+          {productItems.map((item) => (
             <Cart key={item.id} item={item} handleclick={handleclick} />
           ))}
         </div>
